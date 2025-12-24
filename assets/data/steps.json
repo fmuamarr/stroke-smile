@@ -1,0 +1,121 @@
+[
+  {
+    "id": "1",
+    "title": "Persiapan Alat & Pasien",
+    "description": "Langkah awal sebelum memulai perawatan mulut untuk keamanan pasien.",
+    "imageUrl": "assets/images/positioning.png",
+    "steps": [
+      {
+        "text": "⚠️ Cuci tangan dengan 6 langkah.",
+        "imageUrl": "assets/images/onboarding_bg.jpg"
+      },
+      {
+        "text": "Gunakan masker dan sarung tangan."
+      },
+      {
+        "text": "Siapkan alat: Sikat gigi lembut, pasta gigi, handuk, gelas kumur, dan wadah buangan."
+      },
+      {
+        "text": "Pasang handuk di bawah kepala pasien."
+      },
+      {
+        "text": "Posisikan pasien miring atau setengah duduk (30–45°)."
+      },
+      {
+        "text": "Kepala sedikit menunduk ke depan (dagu ke arah dada)."
+      },
+      {
+        "text": "Pasang perlak/tisu di bawah dagu."
+      },
+      {
+        "text": "Siapkan kantong sampah kecil."
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "title": "Proses Menyikat Gigi",
+    "description": "Teknik menyikat gigi yang aman dan efektif.",
+    "imageUrl": "assets/images/brushing.png",
+    "steps": [
+      {
+        "text": "Gunakan stick es krim berlapis kasa untuk membuka mulut."
+      },
+      {
+        "text": "Siapkan sikat gigi dengan pasta gigi sebesar kacang."
+      },
+      {
+        "text": "Sikat gigi dengan sudut 45° menghadap gusi."
+      },
+      {
+        "text": "Urutan menyikat: Samping kanan, Depan, Samping kiri."
+      },
+      {
+        "text": "Sikat bagian dalam (kanan, tengah, kiri) dan langit-langit."
+      },
+      {
+        "text": "Cuci sikat bila gigi sangat kotor."
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "title": "Membersihkan Lidah",
+    "description": "Membersihkan bakteri yang menumpuk di lidah.",
+    "imageUrl": "assets/images/tongue.png",
+    "steps": [
+      {
+        "text": "Gosok lidah ±30 detik dari arah belakang ke depan."
+      },
+      {
+        "text": "Lakukan dengan lembut, jangan menyodok terlalu dalam."
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "title": "Pembersihan Akhir",
+    "description": "Tahap akhir untuk memastikan mulut bersih dan lembap.",
+    "imageUrl": "assets/images/rinsing.png",
+    "steps": [
+      {
+        "text": "Bersihkan mulut dengan kasa + NaCl 0,9% / air matang."
+      },
+      {
+        "text": "Bilas ulang dengan larutan pembersih mulut."
+      },
+      {
+        "text": "Amati tanda aspirasi: Batuk, Wajah kebiruan, Sesak napas."
+      },
+      {
+        "text": "Buang kasa bekas."
+      },
+      {
+        "text": "Oleskan pelembab bibir."
+      }
+    ]
+  },
+  {
+    "id": "5",
+    "title": "Perawatan Gigi Palsu",
+    "description": "Jika pasien menggunakan gigi palsu lepas-pasang.",
+    "imageUrl": "assets/images/denture.png",
+    "steps": [
+      {
+        "text": "Sikat gigi palsu setiap hari dengan sikat lembut dan pembersih non-abrasif."
+      },
+      {
+        "text": "Rendam gigi palsu setiap malam."
+      },
+      {
+        "text": "Hindari air panas."
+      },
+      {
+        "text": "Bersihkan gusi dan langit-langit mulut."
+      },
+      {
+        "text": "Lakukan pemeriksaan rutin ke dokter gigi."
+      }
+    ]
+  }
+]
