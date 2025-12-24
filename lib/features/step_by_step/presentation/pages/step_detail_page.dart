@@ -36,10 +36,32 @@ class StepDetailPage extends StatelessWidget {
               background: Stack(
                 fit: StackFit.expand,
                 children: [
-                  Container(color: AppColors.blueLight), // Placeholder color
-                  const Center(
-                    child: Icon(Icons.image, size: 80, color: Colors.white54),
-                  ),
+                  if (step.imageUrl.isNotEmpty)
+                    Image.asset(
+                      step.imageUrl,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) => Container(
+                        color: AppColors.blueLight,
+                        child: const Center(
+                          child: Icon(
+                            Icons.image,
+                            size: 80,
+                            color: Colors.white54,
+                          ),
+                        ),
+                      ),
+                    )
+                  else
+                    Container(
+                      color: AppColors.blueLight,
+                      child: const Center(
+                        child: Icon(
+                          Icons.image,
+                          size: 80,
+                          color: Colors.white54,
+                        ),
+                      ),
+                    ),
                   Container(
                     decoration: BoxDecoration(
                       gradient: LinearGradient(

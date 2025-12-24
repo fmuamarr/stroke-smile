@@ -100,7 +100,7 @@ class _StepCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            // Image Placeholder
+            // Image Thumbnail
             Container(
               width: 100,
               height: 120,
@@ -110,12 +110,16 @@ class _StepCard extends StatelessWidget {
                   topLeft: Radius.circular(20),
                   bottomLeft: Radius.circular(20),
                 ),
+                image: imageUrl.isNotEmpty
+                    ? DecorationImage(
+                        image: AssetImage(imageUrl),
+                        fit: BoxFit.cover,
+                      )
+                    : null,
               ),
-              child: const Icon(
-                Icons.image,
-                color: AppColors.blueSoft,
-                size: 40,
-              ),
+              child: imageUrl.isEmpty
+                  ? const Icon(Icons.image, color: AppColors.blueSoft, size: 40)
+                  : null,
             ),
             Expanded(
               child: Padding(

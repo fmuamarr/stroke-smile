@@ -1,4 +1,3 @@
-import 'package:hive/hive.dart';
 import '../../domain/entities/video_tutorial.dart';
 
 class VideoTutorialModel extends VideoTutorial {

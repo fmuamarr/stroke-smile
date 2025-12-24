@@ -57,16 +57,23 @@ class ArticleDetailPage extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.grey.shade200,
                 borderRadius: BorderRadius.circular(16),
-                image: const DecorationImage(
-                  image: AssetImage(
-                    'assets/images/education_placeholder.png',
-                  ), // Placeholder
-                  fit: BoxFit.cover,
-                ),
+                image: article.containsKey('imageUrl')
+                    ? DecorationImage(
+                        image: AssetImage(article['imageUrl']!),
+                        fit: BoxFit.cover,
+                      )
+                    : const DecorationImage(
+                        image: AssetImage(
+                          'assets/images/education_placeholder.png',
+                        ), // Placeholder
+                        fit: BoxFit.cover,
+                      ),
               ),
-              child: const Center(
-                child: Icon(Icons.image, size: 64, color: Colors.grey),
-              ),
+              child: article.containsKey('imageUrl')
+                  ? null
+                  : const Center(
+                      child: Icon(Icons.image, size: 64, color: Colors.grey),
+                    ),
             ),
             const SizedBox(height: 24),
             MarkdownBody(

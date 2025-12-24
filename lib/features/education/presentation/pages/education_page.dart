@@ -10,6 +10,7 @@ class EducationPage extends StatelessWidget {
     {
       'title': 'Dasar Pengetahuan Stroke',
       'description': 'Apa itu stroke dan gejala FAST yang harus diwaspadai.',
+      'imageUrl': 'assets/images/types-of-stroke.jpg',
       'content': '''**Apa itu Stroke?**
 Stroke terjadi ketika aliran darah ke otak terganggu.
 *   **Stroke Iskemik:** Penyumbatan pembuluh darah.
@@ -31,6 +32,7 @@ Stroke terjadi ketika aliran darah ke otak terganggu.
       'title': 'Mulut Kotor & Pneumonia',
       'description':
           'Mengapa sikat gigi bisa menyelamatkan nyawa pasien stroke.',
+      'imageUrl': 'assets/images/bersihkan-lidah.jpg',
       'content': '''**Hubungan Mulut & Paru-paru:**
 Mulut yang kotor penuh dengan bakteri jahat. Pada pasien stroke yang sulit menelan (disfagia), air liur yang mengandung bakteri ini bisa "salah jalan" masuk ke saluran napas (aspirasi).
 
@@ -43,6 +45,7 @@ Perawatan mulut terbukti menurunkan angka kematian (mortalitas) dan mencegah inf
     {
       'title': 'Posisi Aman (Cegah Tersedak)',
       'description': 'Posisi tubuh yang benar saat makan dan perawatan mulut.',
+      'imageUrl': 'assets/images/default-1.jpeg',
       'content': '''**Aturan Posisi:**
 1.  **Duduk Tegak (90°):** Posisi paling aman.
 2.  **Setengah Duduk (30-45°):** Naikkan bagian kepala tempat tidur.
@@ -55,6 +58,7 @@ Pertahankan posisi duduk/setengah duduk selama **30 menit setelah makan** untuk 
     {
       'title': 'Makanan & Minuman Aman',
       'description': 'Tekstur makanan yang aman untuk mencegah tersedak.',
+      'imageUrl': 'assets/images/default-2.jpeg',
       'content': '''**Tekstur yang Disarankan (Aman):**
 *   **Makanan Lunak/Halus:** Bubur saring, puree, kentang tumbuk.
 *   **Cairan Kental:** Air yang dikentalkan (thickened liquids) bergerak lebih lambat.
@@ -67,6 +71,7 @@ Pertahankan posisi duduk/setengah duduk selama **30 menit setelah makan** untuk 
     {
       'title': 'Perawatan Sisi Lemah (Hemiparesis)',
       'description': 'Tips khusus untuk sisi wajah yang lumpuh.',
+      'imageUrl': 'assets/images/default-3.jpeg',
       'content': '''**Prinsip Perawatan:**
 1.  **Libatkan Pasien:** Ajak pasien memegang sikat jika mampu.
 2.  **Posisi Perawat:** Berdiri di sisi yang SEHAT (non-paretik) agar pasien menoleh ke arah Anda.
@@ -80,6 +85,7 @@ Selalu periksa pipi bagian dalam sisi lemah (pocketing) setelah makan.''',
       'title': 'Mulut Kering (Xerostomia)',
       'description':
           'Mengatasi mulut kering akibat obat atau bernapas lewat mulut.',
+      'imageUrl': 'assets/images/gigi-palsu.jpeg',
       'content': '''**Penyebab:**
 *   Efek samping obat (Antihipertensi, Antidepresan, Diuretik).
 *   Gangguan saraf.
@@ -99,6 +105,7 @@ Selalu periksa pipi bagian dalam sisi lemah (pocketing) setelah makan.''',
     {
       'title': 'Tanda Bahaya Mulut & Kapan ke Dokter',
       'description': 'Gejala yang memerlukan penanganan medis segera.',
+      'imageUrl': 'assets/images/masker-sarung-tangan.jpg',
       'content': '''**Segera Konsultasi ke Tenaga Kesehatan Jika:**
 1.  **Gusi Berdarah Spontan:** Terus menerus tanpa disikat.
 2.  **Pembengkakan:** Bengkak pada gusi atau wajah.

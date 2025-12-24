@@ -50,7 +50,14 @@ class _ChecklistDetailPageState extends State<ChecklistDetailPage> {
   // Returns 0 if within window, -1 if before, 1 if after
   int _checkTimeWindow(String timeStr) {
     final now = TimeOfDay.now();
-    final parts = timeStr.split(':');
+    
+    // Handle range format "07:00-08:00" by taking the start time
+    String startTimeStr = timeStr;
+    if (timeStr.contains('-')) {
+      startTimeStr = timeStr.split('-')[0];
+    }
+
+    final parts = startTimeStr.split(':');
     final startHour = int.parse(parts[0]);
     final startMinute = int.parse(parts[1]);
 

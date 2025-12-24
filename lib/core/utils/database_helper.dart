@@ -79,7 +79,7 @@ class DatabaseHelper {
         'id': 'morning_care',
         'title': 'Perawatan Pagi',
         'description': 'Sikat gigi, bersihkan lidah & cek sariawan.',
-        'time': '07:00',
+        'time': '07:00-08:00',
         'icon_code_point': 0xe69b, // Icons.wb_sunny_outlined
         'color_value': 0xFFFFA500, // Colors.orange
         'is_default': 1,
@@ -88,7 +88,7 @@ class DatabaseHelper {
         'id': 'afternoon_care',
         'title': 'Perawatan Siang',
         'description': 'Bersihkan sisa makanan setelah makan siang.',
-        'time': '12:00',
+        'time': '12:00-13:00',
         'icon_code_point': 0xf053, // Icons.cleaning_services_outlined
         'color_value': 0xFF64B5F6, // AppColors.blueSoft (approx)
         'is_default': 1,
@@ -97,7 +97,7 @@ class DatabaseHelper {
         'id': 'night_care',
         'title': 'Perawatan Malam',
         'description': 'Lepas gigi palsu (jika ada) & sikat gigi.',
-        'time': '19:00',
+        'time': '19:00-20:00',
         'icon_code_point': 0xe42d, // Icons.nights_stay_outlined
         'color_value': 0xFF9C27B0, // Colors.purple
         'is_default': 1,

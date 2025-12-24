@@ -3,14 +3,16 @@
     "id": "1",
     "title": "Persiapan Alat & Pasien",
     "description": "Langkah awal sebelum memulai perawatan mulut untuk keamanan pasien.",
-    "imageUrl": "assets/images/positioning.png",
+    "imageUrl": "assets/images/persiapan-alat.jpg",
     "steps": [
       {
         "text": "⚠️ Cuci tangan dengan 6 langkah.",
-        "imageUrl": "assets/images/onboarding_bg.jpg"
+        "imageUrl": "assets/images/cuci-tangan.jpg"
       },
       {
-        "text": "Gunakan masker dan sarung tangan."
+        "text": "Gunakan masker dan sarung tangan.",
+        "imageUrl": "assets/images/masker-sarung-tangan.jpg"
+
       },
       {
         "text": "Siapkan alat: Sikat gigi lembut, pasta gigi, handuk, gelas kumur, dan wadah buangan."
@@ -36,7 +38,7 @@
     "id": "2",
     "title": "Proses Menyikat Gigi",
     "description": "Teknik menyikat gigi yang aman dan efektif.",
-    "imageUrl": "assets/images/brushing.png",
+    "imageUrl": "assets/images/default-2.jpeg",
     "steps": [
       {
         "text": "Gunakan stick es krim berlapis kasa untuk membuka mulut."
@@ -62,7 +64,7 @@
     "id": "3",
     "title": "Membersihkan Lidah",
     "description": "Membersihkan bakteri yang menumpuk di lidah.",
-    "imageUrl": "assets/images/tongue.png",
+    "imageUrl": "assets/images/bersihkan-lidah.jpg",
     "steps": [
       {
         "text": "Gosok lidah ±30 detik dari arah belakang ke depan."
@@ -76,7 +78,7 @@
     "id": "4",
     "title": "Pembersihan Akhir",
     "description": "Tahap akhir untuk memastikan mulut bersih dan lembap.",
-    "imageUrl": "assets/images/rinsing.png",
+    "imageUrl": "assets/images/sikat-gigi.jpeg",
     "steps": [
       {
         "text": "Bersihkan mulut dengan kasa + NaCl 0,9% / air matang."
@@ -99,7 +101,7 @@
     "id": "5",
     "title": "Perawatan Gigi Palsu",
     "description": "Jika pasien menggunakan gigi palsu lepas-pasang.",
-    "imageUrl": "assets/images/denture.png",
+    "imageUrl": "assets/images/gigi-palsu.jpeg",
     "steps": [
       {
         "text": "Sikat gigi palsu setiap hari dengan sikat lembut dan pembersih non-abrasif."

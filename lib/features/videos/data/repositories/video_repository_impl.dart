@@ -17,15 +17,9 @@ class VideoRepositoryImpl implements VideoRepository {
   final List<VideoTutorialModel> _allVideos = [
     const VideoTutorialModel(
       id: '1',
-      title: 'Teknik Menyikat Gigi',
+      title: 'Video Demonstrasi Perawatan Mulut',
       url:
-          'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4', // Placeholder
-    ),
-    const VideoTutorialModel(
-      id: '2',
-      title: 'Teknik Menjaga Jalan Napas',
-      url:
-          'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4', // Placeholder
+          'https://github.com/fmuamarr/stroke-smile/releases/download/v1.0-assets/video-demonstrasi.mp4',
     ),
   ];
 
