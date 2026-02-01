@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/constants/app_colors.dart';
+import '../../../../core/utils/notification_service.dart';
 
 class NotificationPage extends StatelessWidget {
   const NotificationPage({super.key});
@@ -24,6 +25,27 @@ class NotificationPage extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.notifications_active,
+              color: AppColors.blueSoft,
+            ),
+            onPressed: () async {
+              // Schedule 10 Second Test
+              await NotificationService().scheduleTestAlarm();
+              if (context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text(
+                      'Alarm dijadwalkan 10 detik dari sekarang. Harap tunggu...',
+                    ),
+                  ),
+                );
+              }
+            },
+          ),
+        ],
       ),
       body: ListView(
         padding: const EdgeInsets.all(24),

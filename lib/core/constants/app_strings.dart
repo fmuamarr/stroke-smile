@@ -1,11 +1,11 @@
 class AppStrings {
-  static const String appName = 'STROKE SMILE';
+  static const String appName = 'Senyum Stroke';
   static const String tagline = 'Panduan Praktis Perawatan Mulut Pasien Stroke';
 
   // Onboarding
-  static const String onboardingTitle = 'Selamat Datang di\nSTROKE SMILE';
+  static const String onboardingTitle = 'Selamat Datang di\nSenyum Stroke:';
   static const String onboardingDesc =
-      'Langkah mudah untuk keluarga — mencegah pneumonia aspirasi, infeksi mulut, dan meningkatkan kenyamanan pasien.';
+      'Panduan Mudah Rawat Mulut Pasien Stroke di Rumah';
   static const String startUsingApp = 'Mulai Gunakan Aplikasi';
 
   // Home

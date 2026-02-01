@@ -4,13 +4,14 @@ import 'core/constants/app_strings.dart';
 import 'core/theme/app_theme.dart';
 import 'features/checklist/presentation/pages/checklist_page.dart';
 import 'features/common/presentation/pages/home_page.dart';
+import 'features/education/presentation/pages/infographic_list_page.dart';
+import 'features/education/domain/entities/infographic.dart';
+import 'features/education/presentation/pages/infographic_detail_page.dart';
 import 'features/education/presentation/pages/article_detail_page.dart';
-import 'features/education/presentation/pages/education_page.dart';
 import 'features/emergency_guide/presentation/pages/emergency_page.dart';
 import 'features/onboarding/presentation/pages/onboarding_page.dart';
 import 'features/step_by_step/domain/entities/step_guide.dart';
 import 'features/step_by_step/presentation/pages/step_detail_page.dart';
-import 'features/step_by_step/presentation/pages/step_list_page.dart';
 import 'features/videos/presentation/pages/video_list_page.dart';
 import 'features/videos/presentation/pages/video_player_page.dart';
 import 'injection/injection_container.dart' as di;
@@ -49,6 +50,17 @@ final GoRouter _router = GoRouter(
       },
     ),
     GoRoute(
+      path: '/emergency-guide',
+      builder: (context, state) => const EmergencyPage(),
+    ),
+    GoRoute(
+      path: '/infographic/detail',
+      builder: (context, state) {
+        final infographic = state.extra as Infographic;
+        return InfographicDetailPage(infographic: infographic);
+      },
+    ),
+    GoRoute(
       path: '/videos/player',
       builder: (context, state) {
         final args = state.extra as Map<String, String>;
@@ -67,7 +79,10 @@ final GoRouter _router = GoRouter(
         ),
         GoRoute(
           path: '/education',
-          builder: (context, state) => const EducationPage(),
+          builder: (context, state) => const InfographicListPage(
+            category: InfographicCategory.education,
+            title: 'Edukasi Stroke',
+          ),
         ),
         GoRoute(
           path: '/videos',
@@ -75,11 +90,17 @@ final GoRouter _router = GoRouter(
         ),
         GoRoute(
           path: '/steps',
-          builder: (context, state) => const StepListPage(),
+          builder: (context, state) => const InfographicListPage(
+            category: InfographicCategory.stepByStep,
+            title: 'Panduan Step-by-Step',
+          ),
         ),
         GoRoute(
           path: '/emergency',
-          builder: (context, state) => const EmergencyPage(),
+          builder: (context, state) => const InfographicListPage(
+            category: InfographicCategory.emergency,
+            title: 'Mode Cepat (Darurat)',
+          ),
         ),
       ],
     ),

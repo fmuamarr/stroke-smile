@@ -2,6 +2,8 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart'
     as fln;
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
+import 'package:flutter_timezone/flutter_timezone.dart';
+import 'dart:io';
 
 class NotificationService {
   static final NotificationService _instance = NotificationService._internal();
@@ -13,6 +15,15 @@ class NotificationService {
 
   Future<void> init() async {
     tz.initializeTimeZones();
+    // Use var and toString() to handle potential type mismatch (String vs TimezoneInfo)
+    // appearing in some environments
+    final timeZoneName = await FlutterTimezone.getLocalTimezone();
+    try {
+      tz.setLocalLocation(tz.getLocation(timeZoneName.toString()));
+    } catch (e) {
+      // Fallback if timezone not found
+      tz.setLocalLocation(tz.getLocation('Asia/Jakarta'));
+    }
 
     const fln.AndroidInitializationSettings initializationSettingsAndroid =
         fln.AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -38,15 +49,26 @@ class NotificationService {
           },
     );
 
-    // Request permissions for Android 13+ (Notification) and Android 12+ (Exact Alarms)
-    final androidImplementation = flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-          fln.AndroidFlutterLocalNotificationsPlugin
-        >();
+    await _requestPermissions();
+  }
 
-    if (androidImplementation != null) {
-      await androidImplementation.requestNotificationsPermission();
-      await androidImplementation.requestExactAlarmsPermission();
+  Future<void> _requestPermissions() async {
+    if (Platform.isAndroid) {
+      final androidImplementation = flutterLocalNotificationsPlugin
+          .resolvePlatformSpecificImplementation<
+            fln.AndroidFlutterLocalNotificationsPlugin
+          >();
+
+      if (androidImplementation != null) {
+        await androidImplementation.requestNotificationsPermission();
+        await androidImplementation.requestExactAlarmsPermission();
+      }
+    } else if (Platform.isIOS) {
+      await flutterLocalNotificationsPlugin
+          .resolvePlatformSpecificImplementation<
+            fln.IOSFlutterLocalNotificationsPlugin
+          >()
+          ?.requestPermissions(alert: true, badge: true, sound: true);
     }
   }
 
@@ -75,6 +97,52 @@ class NotificationService {
       androidScheduleMode: fln.AndroidScheduleMode.exactAllowWhileIdle,
       matchDateTimeComponents: fln.DateTimeComponents.time,
     );
+  }
+
+  Future<void> scheduleTestAlarm() async {
+    final now = tz.TZDateTime.now(tz.local);
+    final scheduledDate = now.add(const Duration(seconds: 10));
+
+    // Log for debugging
+    print('DEBUG: Scheduling test alarm');
+    print('DEBUG: Current time: $now');
+    print('DEBUG: Scheduled for: $scheduledDate');
+    print('DEBUG: Local timezone: ${tz.local}');
+
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+      999,
+      'Test Alarm (10 Detik)',
+      'Alarm ini muncul 10 detik setelah dijadwalkan. Waktu: ${scheduledDate.toString()}',
+      scheduledDate,
+      const fln.NotificationDetails(
+        android: fln.AndroidNotificationDetails(
+          'daily_checklist_channel',
+          'Daily Checklist Reminders',
+          channelDescription: 'Reminders for daily oral care checklist',
+          importance: fln.Importance.max,
+          priority: fln.Priority.high,
+          playSound: true,
+          enableVibration: true,
+        ),
+        iOS: fln.DarwinNotificationDetails(),
+      ),
+      androidScheduleMode: fln.AndroidScheduleMode.exactAllowWhileIdle,
+    );
+
+    final pending = await getPendingNotifications();
+    print('DEBUG: Pending notifications after scheduling: ${pending.length}');
+    for (var p in pending) {
+      print('DEBUG: Pending ID=${p.id}, title=${p.title}');
+    }
+  }
+
+  String getDebugInfo() {
+    final now = tz.TZDateTime.now(tz.local);
+    return 'TZ Local: ${tz.local.name}\nNow: $now';
+  }
+
+  Future<List<fln.PendingNotificationRequest>> getPendingNotifications() async {
+    return await flutterLocalNotificationsPlugin.pendingNotificationRequests();
   }
 
   Future<void> scheduleAllReminders() async {

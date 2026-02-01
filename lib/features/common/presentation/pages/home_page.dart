@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../injection/injection_container.dart';
 import '../../../checklist/presentation/bloc/checklist_bloc.dart';
+import '../bloc/search_bloc.dart';
+import 'search_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -80,19 +82,39 @@ class HomePage extends StatelessWidget {
                       const SizedBox(height: 24),
 
                       // Search Bar
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(16),
-                          border: Border.all(color: Colors.grey.shade200),
-                        ),
-                        child: TextField(
-                          decoration: InputDecoration(
-                            icon: const Icon(Icons.search, color: Colors.grey),
-                            hintText: 'Cari panduan atau video...',
-                            hintStyle: GoogleFonts.nunito(color: Colors.grey),
-                            border: InputBorder.none,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => BlocProvider(
+                                create: (_) => sl<SearchBloc>(),
+                                child: const SearchPage(),
+                              ),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 12,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(color: Colors.grey.shade200),
+                          ),
+                          child: Row(
+                            children: [
+                              const Icon(Icons.search, color: Colors.grey),
+                              const SizedBox(width: 8),
+                              Text(
+                                'Cari panduan atau video...',
+                                style: GoogleFonts.nunito(
+                                  color: Colors.grey,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),

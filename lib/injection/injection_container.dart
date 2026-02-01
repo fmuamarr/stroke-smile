@@ -19,6 +19,9 @@ import '../features/step_by_step/presentation/bloc/step_bloc.dart';
 import '../features/videos/data/datasources/video_local_datasource.dart';
 import '../features/videos/data/repositories/video_repository_impl.dart';
 import '../features/videos/domain/repositories/video_repository.dart';
+import '../features/common/data/repositories/search_repository_impl.dart';
+import '../features/common/domain/repositories/search_repository.dart';
+import '../features/common/presentation/bloc/search_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -90,5 +93,14 @@ Future<void> init() async {
   // Data Source
   sl.registerLazySingleton<VideoLocalDataSource>(
     () => VideoLocalDataSourceImpl(box: videoBox),
+  );
+
+  // ! Features - Search
+  // Bloc
+  sl.registerFactory(() => SearchBloc(searchRepository: sl()));
+  // Repository
+  sl.registerLazySingleton<SearchRepository>(
+    () =>
+        SearchRepositoryImpl(stepLocalDataSource: sl(), videoRepository: sl()),
   );
 }

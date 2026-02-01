@@ -28,8 +28,8 @@ class ScaffoldWithNavBar extends StatelessWidget {
           backgroundColor: Colors.white,
           selectedItemColor: AppColors.greenHealth,
           unselectedItemColor: Colors.grey.shade400,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
+          showSelectedLabels: true,
+          showUnselectedLabels: true,
           type: BottomNavigationBarType.fixed,
           elevation: 0,
           items: const [
@@ -43,11 +43,11 @@ class ScaffoldWithNavBar extends StatelessWidget {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.play_circle_outline_rounded, size: 28),
-              label: 'Videos',
+              label: 'Video',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.school_outlined, size: 28),
-              label: 'Education',
+              label: 'Edukasi',
             ),
           ],
         ),
