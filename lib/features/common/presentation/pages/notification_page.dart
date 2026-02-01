@@ -25,27 +25,27 @@ class NotificationPage extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.notifications_active,
-              color: AppColors.blueSoft,
-            ),
-            onPressed: () async {
-              // Schedule 10 Second Test
-              await NotificationService().scheduleTestAlarm();
-              if (context.mounted) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text(
-                      'Alarm dijadwalkan 10 detik dari sekarang. Harap tunggu...',
-                    ),
-                  ),
-                );
-              }
-            },
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     icon: const Icon(
+        //       Icons.notifications_active,
+        //       color: AppColors.blueSoft,
+        //     ),
+        //     onPressed: () async {
+        //       // Schedule 10 Second Test
+        //       await NotificationService().scheduleTestAlarm();
+        //       if (context.mounted) {
+        //         ScaffoldMessenger.of(context).showSnackBar(
+        //           const SnackBar(
+        //             content: Text(
+        //               'Alarm dijadwalkan 10 detik dari sekarang. Harap tunggu...',
+        //             ),
+        //           ),
+        //         );
+        //       }
+        //     },
+        //   ),
+        // ],
       ),
       body: ListView(
         padding: const EdgeInsets.all(24),
