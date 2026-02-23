@@ -10,7 +10,7 @@ class AppStrings {
 
   // Home
   static const String homeTitle = 'Beranda';
-  static const String menuStepByStep = 'Panduan Step-by-Step';
+  static const String menuStepByStep = 'Panduan Praktik Perawatan Mulut';
   static const String menuEmergency = 'Mode Cepat (Darurat)';
   static const String menuChecklist = 'Checklist Harian';
   static const String menuEducation = 'Edukasi Stroke';

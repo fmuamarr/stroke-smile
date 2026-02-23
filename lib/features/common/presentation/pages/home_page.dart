@@ -138,30 +138,83 @@ class HomePage extends StatelessWidget {
                             );
                           } else if (state is ChecklistLoaded) {
                             // Filter for incomplete items that are NOT missed (skipped)
-                            // A task is missed if current time > task time + 3 hours
+                            // A task is missed if current time > task end time + 1 hour buffer
                             final now = TimeOfDay.now();
                             final nowMinutes = now.hour * 60 + now.minute;
+
+                            // Helper to parse time from format "HH:MM" or "HH:MM-HH:MM"
+                            int? parseStartMinutes(String time) {
+                              try {
+                                // Handle range format "07:00-08:00"
+                                final startTime = time.contains('-')
+                                    ? time.split('-')[0]
+                                    : time;
+                                final parts = startTime.split(':');
+                                return int.parse(parts[0]) * 60 +
+                                    int.parse(parts[1]);
+                              } catch (e) {
+                                return null;
+                              }
+                            }
+
+                            int? parseEndMinutes(String time) {
+                              try {
+                                // Handle range format "07:00-08:00"
+                                final endTime = time.contains('-')
+                                    ? time.split('-')[1]
+                                    : time;
+                                final parts = endTime.split(':');
+                                return int.parse(parts[0]) * 60 +
+                                    int.parse(parts[1]);
+                              } catch (e) {
+                                return null;
+                              }
+                            }
 
                             final nextItems = state.items.where((item) {
                               if (item.isCompleted) return false;
 
-                              try {
-                                final parts = item.time.split(':');
-                                final startHour = int.parse(parts[0]);
-                                final startMinute = int.parse(parts[1]);
-                                final startMinutes =
-                                    startHour * 60 + startMinute;
-                                // 3 hour window to complete
-                                final endMinutes = startMinutes + (3 * 60);
+                              final endMinutes = parseEndMinutes(item.time);
+                              if (endMinutes == null) return true;
 
-                                // Keep if we are still before the end of the window
-                                return nowMinutes <= endMinutes;
-                              } catch (e) {
-                                return true; // Keep if parse fails
-                              }
+                              // 1 hour buffer after end time to complete
+                              final deadlineMinutes = endMinutes + 60;
+
+                              // Keep if we are still before the deadline
+                              return nowMinutes <= deadlineMinutes;
                             }).toList();
 
-                            if (nextItems.isEmpty) {
+                            // Sort by start time to get the most relevant next task
+                            nextItems.sort((a, b) {
+                              final aStart = parseStartMinutes(a.time) ?? 0;
+                              final bStart = parseStartMinutes(b.time) ?? 0;
+                              return aStart.compareTo(bStart);
+                            });
+
+                            // Find the current or next upcoming task
+                            // Prefer task that is currently active (now is within its time window)
+                            final activeItem = nextItems
+                                .cast<dynamic>()
+                                .firstWhere((item) {
+                                  final start = parseStartMinutes(item.time);
+                                  final end = parseEndMinutes(item.time);
+                                  if (start == null || end == null)
+                                    return false;
+                                  // Add 1 hour buffer after end time
+                                  return nowMinutes >= start &&
+                                      nowMinutes <= end + 60;
+                                }, orElse: () => null);
+
+                            // Use active item if found, otherwise first upcoming
+                            final filteredItems = activeItem != null
+                                ? [activeItem as dynamic]
+                                : nextItems.where((item) {
+                                    final start =
+                                        parseStartMinutes(item.time) ?? 0;
+                                    return nowMinutes <= start + 60;
+                                  }).toList();
+
+                            if (filteredItems.isEmpty) {
                               return Container(
                                 padding: const EdgeInsets.all(16),
                                 decoration: BoxDecoration(
@@ -190,7 +243,7 @@ class HomePage extends StatelessWidget {
                               );
                             }
 
-                            final nextTask = nextItems.first;
+                            final nextTask = filteredItems.first;
 
                             return InkWell(
                               onTap: () {
@@ -283,31 +336,24 @@ class HomePage extends StatelessWidget {
                         childAspectRatio: 1.1,
                         children: [
                           _MenuCard(
-                            title: 'Panduan\nStep-by-Step',
-                            icon: Icons.format_list_numbered_rounded,
-                            color: AppColors.blueLight.withOpacity(0.2),
-                            iconColor: AppColors.blueSoft,
+                            title: 'Panduan Praktik\nPerawatan Mulut',
+                            imagePath:
+                                'assets/images/menu-perawatan-mulut.jpeg',
                             onTap: () => context.push('/steps'),
                           ),
                           _MenuCard(
                             title: 'Mode Cepat\n(Darurat)',
-                            icon: Icons.medical_services_outlined,
-                            color: AppColors.error.withOpacity(0.1),
-                            iconColor: AppColors.error,
+                            imagePath: 'assets/images/menu-mode-darurat.jpeg',
                             onTap: () => context.push('/emergency'),
                           ),
                           _MenuCard(
                             title: 'Video\nDemonstrasi',
-                            icon: Icons.play_circle_outline_rounded,
-                            color: Colors.purple.withOpacity(0.1),
-                            iconColor: Colors.purple,
+                            imagePath: 'assets/images/menu-video.jpeg',
                             onTap: () => context.go('/videos'),
                           ),
                           _MenuCard(
                             title: 'Edukasi\nStroke',
-                            icon: Icons.school_outlined,
-                            color: Colors.orange.withOpacity(0.1),
-                            iconColor: Colors.orange,
+                            imagePath: 'assets/images/menu-edukasi-stroke.jpeg',
                             onTap: () => context.go('/education'),
                           ),
                         ],
@@ -326,16 +372,12 @@ class HomePage extends StatelessWidget {
 
 class _MenuCard extends StatelessWidget {
   final String title;
-  final IconData icon;
-  final Color color;
-  final Color iconColor;
+  final String imagePath;
   final VoidCallback onTap;
 
   const _MenuCard({
     required this.title,
-    required this.icon,
-    required this.color,
-    required this.iconColor,
+    required this.imagePath,
     required this.onTap,
   });
 
@@ -345,7 +387,6 @@ class _MenuCard extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(20),
       child: Container(
-        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
@@ -359,23 +400,25 @@ class _MenuCard extends StatelessWidget {
           ],
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: color,
-                borderRadius: BorderRadius.circular(12),
+            Expanded(
+              child: ClipRRect(
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(20),
+                ),
+                child: Image.asset(imagePath, fit: BoxFit.cover),
               ),
-              child: Icon(icon, color: iconColor, size: 24),
             ),
-            Text(
-              title,
-              style: GoogleFonts.poppins(
-                fontSize: 15,
-                fontWeight: FontWeight.w600,
-                color: AppColors.grayText,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              child: Text(
+                title,
+                style: GoogleFonts.poppins(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.grayText,
+                ),
               ),
             ),
           ],

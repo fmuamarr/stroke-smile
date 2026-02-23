@@ -29,7 +29,7 @@ class SearchRepositoryImpl implements SearchRepository {
             description: info.category == InfographicCategory.emergency
                 ? 'Panduan Darurat'
                 : info.category == InfographicCategory.stepByStep
-                ? 'Panduan Step-by-Step'
+                ? 'Panduan Praktik Perawatan Mulut'
                 : info.category == InfographicCategory.education
                 ? 'Infografis Edukasi'
                 : 'Infografis Perawatan',

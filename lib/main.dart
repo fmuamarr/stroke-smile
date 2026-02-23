@@ -92,7 +92,7 @@ final GoRouter _router = GoRouter(
           path: '/steps',
           builder: (context, state) => const InfographicListPage(
             category: InfographicCategory.stepByStep,
-            title: 'Panduan Step-by-Step',
+            title: 'Panduan Praktik Perawatan Mulut',
           ),
         ),
         GoRoute(
